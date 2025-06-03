@@ -3,7 +3,7 @@ services:
     name: mock-interview-app
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    startCommand: "gunicorn run:app"
     envVars:
   - key: SECRET_KEY
     value: thisisasecretkey123
