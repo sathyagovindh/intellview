@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Interview Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+  const loggedIn = {{ 'true' if logged_in else 'false' }};
+</script>
+
+    <style>
+        /* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #fdfdfd;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for main content */
+#container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #333;
+}
+
+/* Form elements */
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select,
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Feedback section */
+.feedback-section {
+  background: #f9f9f9;
+  border-left: 4px solid #007bff;
+  padding: 10px 15px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+/* Header and navigation */
+header {
+  background-color: #fafafa;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #6c63ff;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+nav ul li a, .signin-btn {
+  color: #333;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover, .signin-btn:hover {
+  color: #6c63ff;
+}
+
+/* Main section */
+.main {
+  min-height: 70vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.main-content {
+  flex: 1;
+  max-width: 55%;
+}
+
+.main-content h1 {
+  margin-bottom: 0.8rem;
+  font-size: 2.4rem;
+  color: #2c2c2c;
+}
+
+.main-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.main-content .get-started {
+  padding: 0.8rem 1.6rem;
+  background-color: #6c63ff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.main-content .get-started:hover {
+  background-color: #574fd4;
+}
+
+.main-image {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-image img {
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Sections */
+.section {
+  padding: 3rem 1.5rem;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+.section:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  color: #222;
+}
+
+.section p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #555;
+}
+
+/* Footer */
+footer {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 1rem;
+  min-width: 200px;
+}
+
+.footer-section h4 {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.3rem;
+}
+
+.footer-section ul li a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.copy {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 3rem 2rem;
+  text-align: center;
+  max-width:90%; /* increased from 1200px */
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+
+}
+
+
+.main-content,
+.main-image {
+  flex: 1 1 45%;
+  max-width: 500px;
+}
+
+.main-content {
+  max-width: 1000px; /* increased from 900px */
+  margin: 0 auto;
+  padding: 2rem 2rem; /* slightly increased padding */
+  background-color: #fff;
+}
+
+
+@media (max-width: 768px) {
+  .main-content,
+  .main-image {
+    max-width: 100%;
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .main-content {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .main-image img {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav ul li a, .signin-btn {
+    font-size: 0.9rem;
+  }
+
+  .main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-content h1 {
+    font-size: 2rem;
+  }
+
+  .main-content p {
+    font-size: 1rem;
+  }
+
+  .get-started {
+    padding: 0.6rem 1.2rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 1rem;
+  }
+
+  .main-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .main-content p {
+    font-size: 0.9rem;
+  }
+
+  .get-started {
+    padding: 0.6rem 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.6rem;
+  }
+
+  footer {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .copy {
+    font-size: 0.8rem;
+  }
+}
+
+/* Profile Circle */
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  background: #6c63ff;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+
+
+
+/* --- New styles for 4 main sections --- */
+
+/* Hide interview form, question, and feedback initially */
+
+#interviewForm,
+#questionContainer,
+#feedbackContainer,
+#container{
+  display: none;
+}
+/* Interview form styling */
+#interviewForm {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+.video-gif-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.talking-gif {
+    width: 150px; /* adjust as needed */
+    height: auto;
+    border-radius: 10px; /* optional styling */
+}
+
+
+/* Question container styling */
+#questionContainer {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fffdf7;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* Feedback container styling */
+#feedbackContainer {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #b2dfdb;
+  border-radius: 10px;
+}
+
+/* Question video + text alignment */
+#questionContainer video {
+  display: block;
+  margin: 20px ;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Feedback list styling */
+#feedbackList {
+  background: #fff;
+  border: 1px dashed #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+/* Buttons alignment */
+#questionContainer button,
+#feedbackContainer button {
+  display: block;
+  margin: 20px auto 0;
+}
+
+/* Improve form and textarea spacing */
+#interviewForm label,
+#questionContainer label {
+  margin-top: 15px;
+}
+
+#userAnswer {
+  margin-top: 10px;
+  width: 100%;
+  height: 120px;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #interviewForm, #questionContainer, #feedbackContainer {
+    padding: 15px;
+  }
+
+  #webcam {
+    width: 100%;
+    height: auto;
+  }
+
+  #container {
+    margin: 20px;
+  }
+}
+
+.section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 5% auto;
+}
+
+.contact-section {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 30px 40px;
+  margin-top: 50px;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.contact-list li {
+  margin-bottom: 12px;
+}
+
+.contact-list a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-list a:hover {
+  color: #0056b3;
+}
+    </style>
+</head>
+<body>
+
+
+            <header>
+    <div class="logo">Intelliview</div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('main.home') }}">Home</a></li>
+        <li id="remove_contact"><a href="#contact">Contact</a>
+</li>
+        {% if logged_in %}
+  <li><a href="{{ url_for('main.history') }}">History</a></li>
+ <li> <a href="{{ url_for('main.logout') }}">Logout</a></li>
+{% else %}
+<li>  <a href="{{ url_for('main.login') }}">Login</a></li>
+ <li> <a href="{{ url_for('main.signup') }}">Sign Up</a></li>
+{% endif %}
+           {% if initial %}
+    <span class="profile-circle">{{ initial }}</span>
+  {% endif %}
+      </ul>
+
+
+
+
+        <div>
+
+</div>
+    </nav>
+  </header>
+ <div id="home">
+  <section class="main">
+    <section class="main-wrapper">
+  <div class="main-content">
+     <h1>Begin Your Interview Journey</h1>
+      <p>Master technical interviews with real-time practice, expert tips, and personalized feedback.</p>
+      <button class="get-started" id="get_start">Get Started</button>
+  </div>
+  <div class="main-image">
+<img src="{{ url_for('main.static', filename='image.png') }}" alt="main image" />
+  </div>
+</section>
+
+  </section>
+
+  <section id="services" class="section">
+    <h2>What We Offer</h2>
+    <p>Mock interviews, AI-powered feedback, coding challenges, and expert mentorship all in one platform.</p>
+  </section>
+
+      <section id="contact" class="section contact-section">
+    <h2>Contact Us</h2>
+    <p>Have questions or want to get in touch? We'd love to hear from you!</p>
+    <ul class="contact-list">
+      <li><strong>Email:</strong> <a href="mailto:support@intelliview.com">support@intelliview.com</a></li>
+      <li><strong>Phone:</strong> <a href="tel:+91 8218683541">+91 8218683541</a></li>
+      <li><strong>Address:</strong> 123 Interview Lane, Chennai, TamilNadu</li>
+    </ul>
+  </section>
+
+             <footer>
+    <div class="footer-section mb-4">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <ul>
+        <li>Email: support@intelliview.com</li>
+        <li>Phone: +91 8218683541</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+    <div class="copy">
+      &copy; 2025 InterviewOrbit. All rights reserved.
+    </div>
+  </footer>
+
+        </div>
+  
+        <div id="container">
+
+
+      <form id="interviewForm" action="{{ url_for('main.start_interview') }}" method="post" enctype="multipart/form-data">
+
+            <label for="job_role">Job Role:</label>
+            <input type="text"  id="job_role" name="job_role" required>
+
+            <label for="interview_type">Interview Type:</label>
+            <select id="interview_type" name="interview_type" required>
+                <option value="">Select type</option>
+                <option value="technical">Technical</option>
+                <option value="hr">HR</option>
+                <option value="behavioral">Behavioral</option>
+            </select>
+
+            <label for="duration">Duration (in minutes):</label>
+            <input type="number" id="duration"  name="duration" required min="1">
+
+            <label for="resume">Upload Resume (PDF only):</label>
+            <input type="file"  id="resume" name="resume" accept=".pdf" required>
+
+            <button type="submit">Start Interview</button>
+        </form>
+  </div>
+        <div id="questionContainer">
+    <h2>Question <span id="questionNumber"></span></h2>
+    <p id="currentQuestion" style="font-weight: bold;"></p>
+
+    <div class="video-gif-container">
+        <img src="{{ url_for('main.static', filename='talking.gif') }}" alt="main image" id="talkingGif"  />
+
+        <video id="webcam" width="340" height="100" autoplay muted></video>
+
+</div>
+    <label for="userAnswer">Your Answer:</label>
+    <textarea id="userAnswer" placeholder="Speak or type your answer..."></textarea>
+    <br>
+
+    <button id="nextBtn">Next</button>
+</div>
+
+
+       <div id="feedbackContainer">
+
+  <h2>Interview Feedback</h2>
+  <div id="feedbackList"></div>
+  <button id="downloadPdfBtn">Download PDF</button>
+</div>
+
+
+
+
+
+
+    <script src="{{ url_for('static', filename='../static/js/app.js') }}"></script>  <!-- ✅ Correct -->
+    <script>
+ document.getElementById('get_start').addEventListener('click', () => {
+    if (!loggedIn) {
+      window.location.href = "{{ url_for('main.login') }}";
+    } else {
+      // Show the form instead of redirecting
+      document.getElementById('interviewForm').style.display = 'block';
+       document.getElementById('container').style.display = 'block';
+        document.getElementById('remove_contact').remove();
+    }
+  });
+</script>
+
+</body>
+</html>
