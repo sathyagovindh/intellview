@@ -5,9 +5,10 @@ services:
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn run:app"
     envVars:
-  - key: SECRET_KEY
-    value: thisisasecretkey123
-  - key: MONGO_URI
-    value: mongodb+srv://root:govind12345%2A@mockinterview.kqo48pq.mongodb.net/mock_interview?retryWrites=true&w=majority
-  - key: GENAI_API_KEY
-    value: AIzaSyAjt53_dGsfjDQUdkRwuAIvW6ED4yg9H88
+      - key: SECRET_KEY
+        value: thisisasecretkey123
+      - key: MONGO_URI
+        value: mongodb+srv://root:govind12345%2A@mockinterview.kqo48pq.mongodb.net/mock_interview?retryWrites=true&w=majority
+      - key: GENAI_API_KEY
+        value: AIzaSyAjt53_dGsfjDQUdkRwuAIvW6ED4yg9H88
+
