@@ -1,6 +1,6 @@
 from google import genai
 
-client = genai.Client(api_key="AIzaSyAjt53_dGsfjDQUdkRwuAIvW6ED4yg9H88")
+client = genai.Client(api_key=os.environ.get('GENAI_API_KEY'))
 
 sample_answers = {}
 
