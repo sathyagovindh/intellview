@@ -1,5 +1,6 @@
 Flask==2.2.2
 google-api-python-client==2.75.0
+google-genai
 requests==2.28.1
 pydub==0.25.1         # For audio-to-text conversion
 speechrecognition==3.8.1  # For converting speech to text
