@@ -9,8 +9,8 @@ bcrypt = Bcrypt()
 def create_app():
     app = Flask(__name__)
 
-    app.secret_key = 'your_secret_key'
-    app.config['MONGO_URI'] = 'mongodb://localhost:27017/mock_interview'
+    app.secret_key = os.environ.get('SECRET_KEY')  # Read secret key from environment variable
+    app.config['MONGO_URI'] = os.environ.get('MONGO_URI')  # Read Mongo URI from environment variable
     app.config['SESSION_TYPE'] = 'filesystem'
 
     mongo.init_app(app)
